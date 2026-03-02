@@ -41,32 +41,48 @@ sudo dnf install libusb1-devel pkgconf-pkg-config gcc
 ## Installation & Setup
 
 1. Clone the repository:
+```bash
 git clone https://github.com/sirajperson/rusteeplus-linux-driver.git
+```
+```bash
 cd rusteeplus-linux-driver
+```
 
 2. Remove any conflicting kernel modules:
 If you were previously using a custom C driver, unload it so it doesn't fight for the device:
+```bash
 sudo rmmod supercamera_simple
+```
 
 3. Set up udev rules (Linux):
 By default, Linux requires root to access raw USB devices. Add a udev rule to allow your standard user account to run the driver:
+```bash
 echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="2ce3", ATTR{idProduct}=="3828", MODE="0666"' | sudo tee /etc/udev/rules.d/99-useeplus.rules
+```
+```bash
 sudo udevadm control --reload-rules
+```
+```bash
 sudo udevadm trigger
+```
 (Note: Unplug the camera and plug it back in after running this).
 
 ## Usage
 
 Start the server. You can specify the target framerate (default is 10) to match the exposure speed of your camera environment.
 
+```bash
 cargo run --release -- --fps 10
+```
 
 ### Viewing the Stream
 Once the server is running and the camera is initialized, you can view the stream at http://127.0.0.1:8080. 
 
 For the absolute lowest latency and smoothest playback, connect using mpv with the following flags:
 
+```bash
 mpv http://127.0.0.1:8080/ --profile=low-latency --untimed --no-correct-pts
+```
 
 ## Technical Architecture
 * USB Reader Thread: Connects to Interface 1, Alt-Setting 1. Blasts the init sequence to EP_OUT (0x01) and captures bulk packets from EP_IN (0x81).
