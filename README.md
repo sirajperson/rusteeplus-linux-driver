@@ -35,7 +35,7 @@ sudo dnf install libusb1-devel pkgconf-pkg-config gcc
 ## Installation & Setup
 
 1. Clone the repository:
-git clone https://github.com/YOUR_USERNAME/rusteeplus-linux-driver.git
+git clone https://github.com/sirajperson/rusteeplus-linux-driver.git
 cd rusteeplus-linux-driver
 
 2. Remove any conflicting kernel modules:
