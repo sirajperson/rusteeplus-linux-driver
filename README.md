@@ -24,13 +24,19 @@ It uses libusb to talk directly to the hardware's bulk endpoints. It strips the 
 You will need the standard Rust toolchain installed (via rustup), as well as libusb and pkg-config for your specific distribution:
 
 Arch Linux:
+```bash
 sudo pacman -S libusb pkgconf gcc
+```
 
 Debian / Ubuntu:
+```bash
 sudo apt install libusb-1.0-0-dev pkg-config build-essential
+```
 
 Fedora:
+```bash
 sudo dnf install libusb1-devel pkgconf-pkg-config gcc
+```
 
 ## Installation & Setup
 
